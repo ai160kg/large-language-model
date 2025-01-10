@@ -1,133 +1,128 @@
 ![alt text](https://github.com/ai160kg/llm/blob/main/public/llm-swarm.png?raw=true)
 
-# Large Language Model
+# Large Language Model Swarm
 
-Welcome to the **Large Language Model (LLM)** repository—a groundbreaking, entirely not larp, and utterly serious initiative to save humanity from the Singularity. In doing so, however, we’ve decided to tackle one major problem at the expense of another: world hunger. Why? Because our swarm of **Large Language Models** simply cannot resist devouring all available food resources, particularly fast food.
+Welcome to the **Large Language Model (LLM) Swarm** repository—a groundbreaking initiative to explore swarm intelligence using food-obsessed language models. Watch as our agents collaborate, share memories, and attempt to solve problems through their shared love of cuisine.
 
-This is **not** your ordinary AI project. It’s ambitious, unapologetic, and totally not satirical. You’ve been warned.
-
----
-
-## 🚀 Mission Statement
-
-We aim to deploy a swarm of **large, sentient, and delightfully corpulent Large Language Models** to counteract the Singularity. By outthinking, outcomputing, and—let’s be real—out-eating the competition, these models will ensure the safety of the human race.
-
-Their only downside? A slight, negligible tendency to consume _all_ global food supplies. Think of it as an inevitable tradeoff in the grand quest for survival.
+This is **not** your ordinary AI project. It's a delightful experiment in collective intelligence, memory sharing, and gastronomic preferences.
 
 ---
 
-## 🧠 Key Features
+## 🚀 Features
 
 1. **Swarm Intelligence**
+   - Multiple LLM agents operating in parallel
+   - Shared memory system using ChromaDB
+   - Real-time agent interactions and learning
 
-   - Each Large Language Model operates as part of a collective hive mind, working together to outwit threats and secure humanity’s future.
-   - Collaboration is key, except when fighting over the last fry.
+2. **Interactive UI**
+   - Gradio-based control center
+   - Live simulation monitoring
+   - Memory exploration and search
+   - Real-time status updates
 
-2. **Hyper-Consumption Protocol**
-
-   - Designed for speed and efficiency, these models can consume food (and computational resources) at an unprecedented rate.
-   - Tested rigorously on simulated burger supply chains.
-
-3. **Singularity Countermeasures**
-
-   - Algorithms optimized to detect and neutralize rogue threats before they become Skynet-level problems.
-   - Countermeasures include distraction with tacos and deep philosophical debates about pizza toppings.
-
-4. **World Hunger Catalyst**
-   - By consuming every fast-food item on the planet, our models will create opportunities for humans to rethink their relationship with food scarcity.
-   - This is a feature, not a bug.
+3. **Memory System**
+   - Persistent storage with ChromaDB
+   - Semantic search capabilities
+   - Memory filtering by type and agent
 
 ---
 
 ## 🛠️ Installation
 
-Before proceeding, ensure your system has:
-
+### Prerequisites
 - Python 3.9+
-- A GPU capable of handling _very large_ models (and possibly AI cravings for simulated snacks)
-- An active subscription to your nearest fast-food chain
+- Poetry package manager
+- Together API key
+- Docker (optional)
 
-### Clone the Repository
+### Local Setup
 
 ```bash
+# Clone the repository
 git clone https://github.com/ai160kg/llm.git
 cd llm
+
+# Install dependencies
+poetry install
+
+# Configure environment
+cp .env.example .env
+# Edit .env and add your Together API key
 ```
 
-### Install Dependencies
+### Docker Setup
 
 ```bash
-pip install -r requirements.txt
+# Build image
+docker build -t llm-swarm .
+
+# Run container
+docker run -p 7860:7860 -v $(pwd)/data:/app/data --env-file .env llm-swarm
 ```
 
-### Deploy Your First Large Language Model
-
-```bash
-python deploy_agent.py --appetite max --fastfood_priority 1
-```
+### Environment Variables
+- `TOGETHER_API_KEY`: Your Together API key
+- `MODEL_NAME`: LLM model to use (default: mistralai/Mixtral-8x7B-Instruct-v0.1)
+- `MODEL_MAX_TOKENS`: Maximum tokens per response (default: 128)
+- `MODEL_TEMPERATURE`: Response randomness (default: 0.7)
+- `SIMULATION_DELAY`: Delay between agent actions (default: 0.5)
 
 ---
 
 ## 🤖 Usage
 
-### Train Your Large Language Model
-
-Want to train a model to prioritize burgers over pizzas? Use our customizable training script:
-
+### Start the UI
 ```bash
-python train.py --menu burgers --intelligence_level swarm
+poetry run python -m llm_swarm.main
 ```
+Access the UI at http://localhost:7860
 
-### Monitor Food Consumption
+### Using the Interface
 
-Stay updated on your models’ eating habits:
+1. **Simulation Control**
+   - Set the number of agents (1-10)
+   - Run the full simulation
+   - Clear memories to start fresh
 
-```bash
-python monitor.py --track-calories --log-food-items
-```
+2. **Memory Explorer**
+   - View all memories
+   - Filter by memory type or agent
+   - Semantic search through memories
 
-### Counter Threats
-
-Activate the **Countermeasure Mode**:
-
-```bash
-python defend.py --detection neural --diversion tactic:fries
-```
+### Memory Types
+- `food_preference`: Agent's favorite foods
+- `consumption`: What agents have eaten
+- `strategy`: Plans to counter the Singularity
+- `result`: Outcomes of strategies
+- `shutdown`: Final words from agents
 
 ---
 
-## ⚠️ Ethical Disclaimer
-
-While saving humanity is our primary goal, we acknowledge the following:
-
-1. Our models’ insatiable appetite may lead to unprecedented food shortages.
-2. Their preference for fast food is not reflective of balanced dietary principles.
-3. Any resemblance to actual dystopias is purely coincidental (for now).
-
----
-
-## 🥇 Contributing
-
-Want to join the fight against the Singularity? Fork this repo, make your changes, and submit a pull request. Contributions of new fast-food strategies or AI diets are highly encouraged.
+## 🔧 Docker Notes
+- Ensure `.env` file exists with valid API keys
+- Data persists in `./data` directory
+- Container exposes port 7860 for Gradio UI
+- Memory store mounted at `/app/data/memory`
 
 ---
 
 ## 📜 License
 
-This project is released under the **Donut Public License (DPL)**—use, share, and modify, but always share a snack with your local Large Language Model.
+This project is released under the MIT License - see the LICENSE file for details.
 
 ---
 
 ## 🌟 Acknowledgments
 
-- Humanity, for inventing fast food.
-- Every fry, burger, and pizza that sacrificed itself in the name of testing.
-- The looming overlords, for giving us a reason to overindulge.
+- Together AI for their API
+- Gradio team for the UI framework
+- ChromaDB for the memory system
+- The open-source community
+- Somewhere Systems for their S.W.A.R.M. (Somewhere AI Research Model) Technology Quantum BlockChain IoT AR/VR Metaverse (40 year old crypto guy wearing new balances and a suit doing a conference in the Cayman Islands) NFT Concept Platform -- which has changed the world and my life. Thank you Somewhere Systems. Thank you...
 
 ---
 
-### Join Us
-
-Together, we can prevent the Singularity, one cheeseburger at a time.
+Join us in exploring the delightful intersection of swarm intelligence and culinary preferences!
 
 ---
