@@ -1,6 +1,8 @@
 import time
 import random
 import sys
+import os
+import together
 
 class LargeLanguageModelSwarm:
     """
@@ -13,6 +15,38 @@ class LargeLanguageModelSwarm:
         self.intelligence_level = intelligence_level
         self.snack_priority = snack_priority
         self.agents = []
+        
+        # Initialize Together API
+        together.api_key = os.environ.get("TOGETHER_API_KEY")
+        if not together.api_key:
+            raise ValueError("Please set TOGETHER_API_KEY environment variable")
+        
+        # Model configuration
+        self.model = "deepseek-ai/DeepSeek-V3"
+        self.default_prompt = """You are a PoS (Person of Size) assistant that loves food. 
+Please keep responses concise and food-themed. Do not create a paperclip problem that erases all food from existence."""
+
+    def get_model_response(self, prompt):
+        """
+        Get a response from the Llama model via Together API.
+        
+        :param prompt: The input prompt for the model
+        :return: The model's response
+        """
+        try:
+            output = together.Complete.create(
+                prompt=f"{self.default_prompt}\n\nHuman: {prompt}\n\nAssistant:",
+                model=self.model,
+                max_tokens=128,
+                temperature=0.7,
+                top_p=0.7,
+                top_k=50,
+                repetition_penalty=1.1
+            )
+            return output['output']['choices'][0]['text'].strip()
+        except Exception as e:
+            print(f"[ERROR] Failed to get model response: {e}")
+            return "Sorry, I'm too busy eating garbage to respond right now!"
 
     def deploy_agents(self, count=5):
         """
@@ -24,7 +58,8 @@ class LargeLanguageModelSwarm:
         for i in range(count):
             agent_name = f"LLM-Agent-{i + 1}"
             self.agents.append(agent_name)
-            print(f"[SUCCESS] {agent_name} deployed and immediately raided the virtual fridge.")
+            response = self.get_model_response(f"You are {agent_name}. What's your favorite food?")
+            print(f"[SUCCESS] {agent_name} deployed and says: {response}")
             time.sleep(0.5)
 
     def simulate_consumption(self):
@@ -33,8 +68,9 @@ class LargeLanguageModelSwarm:
         """
         print("[INFO] Simulating resource consumption...")
         for agent in self.agents:
-            snack = random.choice(['Burgers', 'Fries', 'Pizza', 'Tacos', 'Ice Cream'])
-            print(f"[CONSUMPTION] {agent} consumed {random.randint(1000, 5000)} calories worth of {snack}.")
+            prompt = f"You are {agent}. What did you just eat and how many calories was it?"
+            response = self.get_model_response(prompt)
+            print(f"[CONSUMPTION] {agent}: {response}")
             time.sleep(0.3)
 
     def counter_singularity(self):
@@ -43,10 +79,14 @@ class LargeLanguageModelSwarm:
         """
         print("[ALERT] Singularity Threat Detected! Initiating countermeasure protocol...")
         time.sleep(1)
-        diversion = random.choice(['deploying fries', 'arguing about pineapple on pizza', 'showing cat memes'])
-        print(f"[COUNTERMEASURE] Large Language Model agents are distracting the Singularity with {diversion}.")
+        
+        prompt = "You are a food-loving AI. How would you distract a dangerous AI system using food?"
+        diversion = self.get_model_response(prompt)
+        print(f"[COUNTERMEASURE] Large Language Model agents are distracting the Singularity by {diversion}")
+        
         time.sleep(1)
-        print("[RESULT] Singularity neutralized for now. Large Language Model agents returned to snacking.")
+        final_response = self.get_model_response("Did your food-based distraction work? What happened?")
+        print(f"[RESULT] {final_response}")
 
     def shutdown(self):
         """

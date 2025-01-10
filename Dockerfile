@@ -11,7 +11,8 @@ COPY README.md /app/
 RUN pip install --no-cache-dir \
     numpy \
     pandas \
-    requests
+    requests \
+    together
 
 # Set the default command to run the application
 CMD ["python", "src/agents.py"] 
