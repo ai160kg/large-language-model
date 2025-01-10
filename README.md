@@ -1,3 +1,5 @@
+![alt text](https://github.com/ai160kg/llm/public/llm-swarm.png?raw=true)
+
 # Large Language Model
 
 Welcome to the **Large Language Model (LLM)** repository—a groundbreaking, entirely not larp, and utterly serious initiative to save humanity from the Singularity. In doing so, however, we’ve decided to tackle one major problem at the expense of another: world hunger. Why? Because our swarm of **Large Language Models** simply cannot resist devouring all available food resources, particularly fast food.
