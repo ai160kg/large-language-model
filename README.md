@@ -1,4 +1,4 @@
-![alt text]([https://github.com/ai160kg/llm/public/llm-swarm.png](https://github.com/ai160kg/llm/blob/main/public/llm-swarm.png)?raw=true)
+![alt text]([https://github.com/ai160kg/llm/public/llm-swarm.png](https://github.com/ai160kg/llm/blob/main/public/llm-swarm.png?raw=true)
 
 # Large Language Model
 
